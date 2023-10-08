@@ -21,6 +21,38 @@ class Channel:
         self.video_count = self.response['items'][0]['statistics']['videoCount']
         self.view_count = self.response['items'][0]['statistics']['viewCount']
 
+    def __str__(self):
+        """Возвращающает название и ссылку на канал"""
+        return f"{self.title} ({self.url})"
+
+    def __add__(self, other):
+        """Складывает два канала между собой по количеству подписчиков"""
+        return self.subscriber_count + other.subscriber_count
+
+    def __sub__(self, other):
+        """Вычитает два канала между собой по количеству подписчиков"""
+        return int(self.subscriber_count) - int(other.subscriber_count)
+
+    def __gt__(self, other):
+        """Сравнивает (больше) два канала между собой по количеству подписчиков"""
+        return self.subscriber_count > other.subscriber_count
+
+    def __ge__(self, other):
+        """Сравнивает (больше или равно) два канала между собой по количеству подписчиков"""
+        return self.subscriber_count >= other.subscriber_count
+
+    def __lt__(self, other):
+        """Сравнивает (меньше) два канала между собой по количеству подписчиков"""
+        return self.subscriber_count < other.subscriber_count
+
+    def __le__(self, other):
+        """Сравнивает (меньше или равно) два канала между собой по количеству подписчиков"""
+        return self.subscriber_count <= other.subscriber_count
+
+    def __eq__(self, other):
+        """Сравнивает (равны или не равны) два канала между собой по количеству подписчиков"""
+        return self.subscriber_count == other.subscriber_count
+
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         print(json.dumps(self.response, indent=2, ensure_ascii=False))
